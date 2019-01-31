@@ -45,13 +45,14 @@ class PagesController < ApplicationController
       items = playlist_response_body["items"]
       @names = []
       items.each do |item|
-        @names << {name: item["name"], id: item["id"]}
+        @names << {name: item["name"], id: item["id"], url: item["spotify"]}
       end
   end
 
   def data
     # Get playlist id that user clicked on and token from params hash
     @name = params[:playlist_name]
+    @url = params[:url]
     @playlist_id = params[:playlist_id]
     @token = params[:token]
 

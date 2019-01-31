@@ -12,7 +12,27 @@
  *
  */
 
- @import 'bootstrap';
+@import 'bootstrap';
+
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+    // For Google Chrome
+    ::-webkit-scrollbar {
+        width:  $size;
+        height: $size;
+    }
+  
+    ::-webkit-scrollbar-thumb {
+        background: $foreground-color;
+    }
+  
+    ::-webkit-scrollbar-track {
+        background: $background-color;
+    }
+}
+
+@include scrollbars(.5em, gray);
+
+
 html, body {
     width:100%;
     margin: 0;
@@ -24,8 +44,9 @@ html, body {
 }
 
 
+
 .data {
-    background-color: #fdf5e6;
+    background-color: white;
 }
 
 hr {

@@ -1,7 +1,7 @@
 console.log("Danceability <%=@danceability%> Energy <%=@energy%> Valence <%=@valence%> Acousticness <%=@acousticness%> Instrumentalness <%=@instrumentalness%> Liveness <%=@liveness%> Tempo <%=@tempo%>");
 
 
-document.getElementById("playlist-name").innerHTML= "<h1>Average audiofeatures for <%=@name%></h1>";
+document.getElementById("playlist-name").innerHTML= "<h1>Average audiofeatures for <u class='playlist-link'><%=@name%></u></h1>";
 for(var i = 1; i <= 4; i++) {
 	console.log("data"+i);
 	document.getElementById("data"+i).innerHTML ='';
@@ -25,7 +25,7 @@ dancePie = new d3pie("data2", {
 			"font": "verdana"
 		},
 		"subtitle": {
-			"color": "#999999",
+			"color": "#000000",
 			"fontSize": 10,
 			"font": "verdana"
 		},
@@ -33,7 +33,7 @@ dancePie = new d3pie("data2", {
     },
     "footer": {
 		"text": "Danceability",
-		"color": "#999999",
+		"color": "#000000",
 		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
@@ -49,7 +49,7 @@ dancePie = new d3pie("data2", {
 			{
 				"label": "Danceability",
 				"value": <%=@danceability%>,
-				"color": "#7e3838"
+				"color": "#A239CA"
 			},
 			{
 				"label": "Undanceability",
@@ -82,7 +82,7 @@ dancePie = new d3pie("data2", {
 	},
 	"misc": {
 		"color": {
-			"segmentStroke": "#ffffff"
+			"segmentStroke": "#000000"
 		}
 	}
 });
@@ -93,7 +93,7 @@ energyPie = new d3pie("data3", {
 			"font": "verdana"
 		},
 		"subtitle": {
-			"color": "#999999",
+			"color": "#000000",
 			"fontSize": 10,
 			"font": "verdana"
 		},
@@ -101,7 +101,7 @@ energyPie = new d3pie("data3", {
     },
     "footer": {
 		"text": "Energy",
-		"color": "#999999",
+		"color": "#000000",
 		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
@@ -117,7 +117,7 @@ energyPie = new d3pie("data3", {
 			{
 				"label": "Danceability",
 				"value": <%=@energy%>,
-				"color": "#7e3838"
+				"color": "#4717F6"
 			},
 			{
 				"label": "Undanceability",
@@ -150,7 +150,7 @@ energyPie = new d3pie("data3", {
 	},
 	"misc": {
 		"color": {
-			"segmentStroke": "#ffffff"
+			"segmentStroke": "#000000"
 		}
 	}
 });
@@ -161,7 +161,7 @@ valencePie = new d3pie("data4", {
 			"font": "verdana"
 		},
 		"subtitle": {
-			"color": "#999999",
+			"color": "#000000",
 			"fontSize": 10,
 			"font": "verdana"
 		},
@@ -169,7 +169,7 @@ valencePie = new d3pie("data4", {
     },
     "footer": {
 		"text": "Valence",
-		"color": "#999999",
+		"color": "#000000",
 		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
@@ -185,7 +185,7 @@ valencePie = new d3pie("data4", {
 			{
 				"label": "Danceability",
 				"value": <%=@valence%>,
-				"color": "#7e3838"
+				"color": "#0e0b16"
 			},
 			{
 				"label": "Undanceability",
@@ -218,7 +218,7 @@ valencePie = new d3pie("data4", {
 	},
 	"misc": {
 		"color": {
-			"segmentStroke": "#ffffff"
+			"segmentStroke": "#000000"
 		}
 	}
 });
