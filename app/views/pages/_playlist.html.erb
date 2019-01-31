@@ -1,3 +1,3 @@
 <li> 
-    <%=link_to name[:name], {:controller => "pages", :action => "data", :playlist_id => name[:id], :token=>@client_access_token, :remote => true }, class:"text-decoration-none" %>
+    <%=link_to name[:name], {:controller => "pages", :action => "data", :playlist_id => name[:id], :playlist_name => name[:name], :token=>@client_access_token, :remote => true }, class:"text-decoration-none" %>
 </li>

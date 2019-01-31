@@ -1,19 +1,20 @@
 console.log("Danceability <%=@danceability%> Energy <%=@energy%> Valence <%=@valence%> Acousticness <%=@acousticness%> Instrumentalness <%=@instrumentalness%> Liveness <%=@liveness%> Tempo <%=@tempo%>");
 
 
-for(var i = 1; i <= 7; i++) {
+document.getElementById("playlist-name").innerHTML= "<h1>Average audiofeatures for <%=@name%></h1>";
+for(var i = 1; i <= 4; i++) {
 	console.log("data"+i);
 	document.getElementById("data"+i).innerHTML ='';
 }
 var tempo = document.getElementById("data1");
-var tempoHead = document.createElement('h1');
+var tempoHead = document.createElement('h3');
 var textNode = document.createTextNode("Tempo: <%=@tempo.to_i%> BPM");
 tempoHead.appendChild(textNode);
 tempo.appendChild(tempoHead);
 
 var pieFont ='';
-var pieMaxWidth = 400;
-var pieMaxHeight = 400;
+var pieMaxWidth = 700;
+var pieMaxHeight = 700;
 
 
 
@@ -31,8 +32,9 @@ dancePie = new d3pie("data2", {
 		"titleSubtitlePadding": 12
     },
     "footer": {
+		"text": "Danceability",
 		"color": "#999999",
-		"fontSize": 11,
+		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
     },
@@ -67,8 +69,8 @@ dancePie = new d3pie("data2", {
 		"percentage": {
 			"color": "#e1e1e1",
 			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
+			"fontSize": 40*(<%=@danceability%>/100),
+			"decimalPlaces": 0
 		},
 		"value": {
 			"color": "#e1e1e1",
@@ -98,8 +100,9 @@ energyPie = new d3pie("data3", {
 		"titleSubtitlePadding": 12
     },
     "footer": {
+		"text": "Energy",
 		"color": "#999999",
-		"fontSize": 11,
+		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
     },
@@ -134,8 +137,8 @@ energyPie = new d3pie("data3", {
 		"percentage": {
 			"color": "#e1e1e1",
 			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
+			"fontSize": 40*(<%=@energy%>/100),
+			"decimalPlaces": 0
 		},
 		"value": {
 			"color": "#e1e1e1",
@@ -165,8 +168,9 @@ valencePie = new d3pie("data4", {
 		"titleSubtitlePadding": 12
     },
     "footer": {
+		"text": "Valence",
 		"color": "#999999",
-		"fontSize": 11,
+		"fontSize": 20,
 		"font": "open sans",
 		"location": "bottom-center"
     },
@@ -201,8 +205,8 @@ valencePie = new d3pie("data4", {
 		"percentage": {
 			"color": "#e1e1e1",
 			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
+			"fontSize": 40*(<%=@valence%>/100),
+			"decimalPlaces": 0
 		},
 		"value": {
 			"color": "#e1e1e1",
@@ -219,203 +223,3 @@ valencePie = new d3pie("data4", {
 	}
 });
 
-acousticPie = new d3pie("data5", {
-    "header": {
-		"title": {
-			"font": "verdana"
-		},
-		"subtitle": {
-			"color": "#999999",
-			"fontSize": 10,
-			"font": "verdana"
-		},
-		"titleSubtitlePadding": 12
-    },
-    "footer": {
-		"color": "#999999",
-		"fontSize": 11,
-		"font": "open sans",
-		"location": "bottom-center"
-    },
-    "size": {
-		"canvasHeight": pieMaxHeight*(<%=@acousticness%>/100),
-		"canvasWidth": pieMaxWidth*(<%=@acousticness%>/100),
-		"pieOuterRadius": "88%"
-    },
-    
-    "data": {
-		"content": [
-			{
-				"label": "Danceability",
-				"value": <%=@acousticness%>,
-				"color": "#7e3838"
-			},
-			{
-				"label": "Undanceability",
-				"value": 100-<%=@acousticness%>,
-				"color": "#e1e1e1"
-			}
-		]
-	},
-	"labels": {
-		"outer": {
-			"format": "none",
-			"pieDistance": 32
-		},
-		"mainLabel": {
-			"font": "verdana"
-		},
-		"percentage": {
-			"color": "#e1e1e1",
-			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
-		},
-		"value": {
-			"color": "#e1e1e1",
-			"font": "verdana"
-		},
-		"truncation": {
-			"enabled": true
-		}
-	},
-	"misc": {
-		"color": {
-			"segmentStroke": "#ffffff"
-		}
-	}
-});
-
-instrumentalPie = new d3pie("data6", {
-    "header": {
-		"title": {
-			"font": "verdana"
-		},
-		"subtitle": {
-			"color": "#999999",
-			"fontSize": 10,
-			"font": "verdana"
-		},
-		"titleSubtitlePadding": 12
-    },
-    "footer": {
-		"color": "#999999",
-		"fontSize": 11,
-		"font": "open sans",
-		"location": "bottom-center"
-    },
-    "size": {
-		"canvasHeight": pieMaxHeight*(<%=@instrumentalness%>/100),
-		"canvasWidth": pieMaxWidth*(<%=@instrumentalness%>/100),
-		"pieOuterRadius": "88%"
-    },
-    
-    "data": {
-		"content": [
-			{
-				"label": "Danceability",
-				"value": <%=@instrumentalness%>,
-				"color": "#7e3838"
-			},
-			{
-				"label": "Undanceability",
-				"value": 100-<%=@instrumentalness%>,
-				"color": "#e1e1e1"
-			}
-		]
-	},
-	"labels": {
-		"outer": {
-			"format": "none",
-			"pieDistance": 32
-		},
-		"mainLabel": {
-			"font": "verdana"
-		},
-		"percentage": {
-			"color": "#e1e1e1",
-			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
-		},
-		"value": {
-			"color": "#e1e1e1",
-			"font": "verdana"
-		},
-		"truncation": {
-			"enabled": true
-		}
-	},
-	"misc": {
-		"color": {
-			"segmentStroke": "#ffffff"
-		}
-	}
-});
-
-livenessPie = new d3pie("data7", {
-    "header": {
-		"title": {
-			"font": "verdana"
-		},
-		"subtitle": {
-			"color": "#999999",
-			"fontSize": 10,
-			"font": "verdana"
-		},
-		"titleSubtitlePadding": 12
-    },
-    "footer": {
-		"color": "#999999",
-		"fontSize": 11,
-		"font": "open sans",
-		"location": "bottom-center"
-    },
-    "size": {
-		"canvasHeight": pieMaxHeight*(<%=@liveness%>/100),
-		"canvasWidth": pieMaxWidth*(<%=@liveness%>/100),
-		"pieOuterRadius": "88%"
-    },
-    
-    "data": {
-		"content": [
-			{
-				"label": "liveness",
-				"value": <%=@liveness%>,
-				"color": "#7e3838"
-			},
-			{
-				"label": "Unliveness",
-				"value": 100-<%=@liveness%>,
-				"color": "#e1e1e1"
-			}
-		]
-	},
-	"labels": {
-		"outer": {
-			"format": "none",
-			"pieDistance": 32
-		},
-		"mainLabel": {
-			"font": "verdana"
-		},
-		"percentage": {
-			"color": "#e1e1e1",
-			"font": "verdana",
-			"fontSize": 20,
-			"decimalPlaces": 2
-		},
-		"value": {
-			"color": "#e1e1e1",
-			"font": "verdana"
-		},
-		"truncation": {
-			"enabled": true
-		}
-	},
-	"misc": {
-		"color": {
-			"segmentStroke": "#ffffff"
-		}
-	}
-});

@@ -51,6 +51,7 @@ class PagesController < ApplicationController
 
   def data
     # Get playlist id that user clicked on and token from params hash
+    @name = params[:playlist_name]
     @playlist_id = params[:playlist_id]
     @token = params[:token]
 

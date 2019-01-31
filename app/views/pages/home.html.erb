@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'd3pie.min' %>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2 pre-scrollable sidebar text-white">
+    <div class="col-lg-2 sidebar text-white">
       <img class="img-fluid mt-2" src="<%= @profile_pic if !@profile_pic.nil?%>" alt="" id="user-profile">
       <h1 class="mt-4"><%= @display_name %></h1>
       <hr>
@@ -12,10 +12,13 @@
     <div class="col data">
       <div class="container pl-0 ml-0">
         <div class="row justify-content-end">
-          <%= form_tag(root_path, :method=>"get") do %>
-            Search user <%= text_field_tag :user %>
-            <%= submit_tag 'Search' %>
+          <%= form_tag(root_path, :method=>"get", class: "form-inline my-2") do %>
+              <%= text_field_tag :user, nil, {placeholder: "Enter a Spotify ID", class: "form-control mr-sm-2"} %>
+            <%= submit_tag 'Search', class: "btn btn-outline-success my-2 my-sm-0" %>
           <% end %>
+        </div>
+        <div class="row">
+          <div class="col" id="playlist-name"></div>
         </div>
         <div class="row">
           <div class="col-lg-4" id="data1"></div>
@@ -24,9 +27,6 @@
 					<div class="col" id="data2"></div>
 					<div class="col" id="data3"></div>
 					<div class="col" id="data4"></div>
-					<div class="col" id="data5"></div>
-					<div class="col" id="data6"></div>
-					<div class="col" id="data7"></div>
         </div>
       </div>
     </div>
