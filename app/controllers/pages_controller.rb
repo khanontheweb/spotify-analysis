@@ -114,6 +114,14 @@ class PagesController < ApplicationController
     @liveness /= num_audiofeatures
     @tempo /= num_audiofeatures
 
+    @danceability = (@danceability*100).round(2)
+    @energy = (@energy*100).round(2)
+    @valence = (@valence*100).round(2)
+    @acousticness = (@acousticness*100).round(2)
+    @instrumentalness = (@instrumentalness*100).round(2)
+    @liveness = (@liveness*100).round(2)
+
+
     # Display the features for user
     respond_to do |format|
       format.js{}

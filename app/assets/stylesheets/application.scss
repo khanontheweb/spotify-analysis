@@ -21,10 +21,13 @@ html, body {
 
 .sidebar {
     background-color: black;
+    max-height: 100vh;
+    overflow-y: scroll;
 }
 
+
 .data {
-    background-color: #DCDCDC;
+    background-color: #fdf5e6;
 }
 
 hr {
