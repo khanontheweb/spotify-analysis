@@ -93,14 +93,17 @@ class PagesController < ApplicationController
     @tempo = 0
     # Add the values to sum
     audiofeature_body["audio_features"].each do |track| 
-      @danceability += track["danceability"].to_i
-      @energy += track["energy"].to_i
-      @valence += track["valence"].to_i
-      @acousticness += track["acousticness"].to_i
-      @instrumentalness += track["instrumentalness"].to_i
-      @liveness += track["liveness"].to_i
-      @tempo += track["tempo"].to_i
+      
+      @danceability += track["danceability"].to_f
+      @energy += track["energy"].to_f
+      @valence += track["valence"].to_f
+      @acousticness += track["acousticness"].to_f
+      @instrumentalness += track["instrumentalness"].to_f
+      @liveness += track["liveness"].to_f
+      @tempo += track["tempo"].to_f
     end
+    
+    #Now average them
     num_audiofeatures = audiofeature_body["audio_features"].count
     puts "Num audiofeatures #{num_audiofeatures}"
     @danceability /= num_audiofeatures

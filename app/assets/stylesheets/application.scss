@@ -13,3 +13,28 @@
  */
 
  @import 'bootstrap';
+html, body {
+    width:100%;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar {
+    background-color: black;
+}
+
+.data {
+    background-color: #DCDCDC;
+}
+
+hr {
+    border-color: #DCDCDC;
+}
+
+a {
+    color:#DCDCDC;
+    &:hover {
+        text-decoration: none;
+        color:white;
+    }
+}
