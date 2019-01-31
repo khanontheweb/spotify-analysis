@@ -1,7 +1,7 @@
 <%= javascript_include_tag 'd3pie.min' %>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-lg-2 sidebar text-white">
+    <div class="col-lg-2 sidebar bg-light text-dark">
       <img class="img-fluid mt-3" src="<%= @profile_pic if !@profile_pic.nil?%>" alt="" id="user-profile">
       <h1 class="mt-4"><%= @display_name %></h1>
       <hr>
