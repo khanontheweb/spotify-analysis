@@ -27,11 +27,17 @@ class PagesController < ApplicationController
         "Authorization" => "Bearer #{@client_access_token}"
       }
 
-      user_id = "tuggareutangranser"
+      if params[:user]
+        user_id = params[:user]
+      else
+        user_id = "tuggareutangranser"
+      end
       user_response = HTTParty.get("https://api.spotify.com/v1/users/#{user_id}", :headers=> user_headers)
       user_response_body = JSON.parse(user_response.body)
       @display_name = user_response_body["display_name"]
-      @profile_pic = user_response_body["images"][0]["url"]
+      if !user_response_body["images"].empty?
+        @profile_pic = user_response_body["images"][0]["url"]
+      end
       
       
       playlist_response = HTTParty.get("https://api.spotify.com/v1/users/#{user_id}/playlists", :query=>{"limit"=>50}, :headers=>user_headers)
@@ -39,10 +45,75 @@ class PagesController < ApplicationController
       items = playlist_response_body["items"]
       @names = []
       items.each do |item|
-        @names << item["name"]
+        @names << {name: item["name"], id: item["id"]}
       end
   end
 
-  def search
+  def data
+    # Get playlist id that user clicked on and token from params hash
+    @playlist_id = params[:playlist_id]
+    @token = params[:token]
+
+    # Set header to access token with proper format 
+    user_headers = {
+      "Authorization" => "Bearer #{@token}"
+    }
+
+    # Query for a playlists tracks
+    query = {
+      "fields" => "items(track(id))"
+    }
+
+    # Get the tracks and put the ids in to comma separated list
+    tracklist_response = HTTParty.get("https://api.spotify.com/v1/playlists/#{@playlist_id}/tracks", :headers=>user_headers, :query=>query)
+    tracklist_response_body = JSON.parse(tracklist_response.body)
+    items = tracklist_response_body["items"]
+    playlist_tracks = ""
+    puts "Tracks #{items.count}"
+    items.each do |item|
+      if item == items.last
+        playlist_tracks << item["track"]["id"]
+      else
+        playlist_tracks << item["track"]["id"]
+        playlist_tracks << ","
+      end
+    end
+    puts playlist_tracks
+
+    # Get audio features of tracks from the string from last API call
+    audiofeature_response = HTTParty.get("https://api.spotify.com/v1/audio-features", :headers=>user_headers, :query=>{"ids"=>playlist_tracks})
+    audiofeature_body = JSON.parse(audiofeature_response.body)
+    # Declare variables to store sum
+    @danceability = 0
+    @energy = 0
+    @valence = 0 
+    @acousticness = 0
+    @instrumentalness = 0
+    @liveness = 0 
+    @tempo = 0
+    # Add the values to sum
+    audiofeature_body["audio_features"].each do |track| 
+      @danceability += track["danceability"].to_i
+      @energy += track["energy"].to_i
+      @valence += track["valence"].to_i
+      @acousticness += track["acousticness"].to_i
+      @instrumentalness += track["instrumentalness"].to_i
+      @liveness += track["liveness"].to_i
+      @tempo += track["tempo"].to_i
+    end
+    num_audiofeatures = audiofeature_body["audio_features"].count
+    puts "Num audiofeatures #{num_audiofeatures}"
+    @danceability /= num_audiofeatures
+    @energy /= num_audiofeatures
+    @valence /= num_audiofeatures
+    @acousticness /= num_audiofeatures
+    @instrumentalness /= num_audiofeatures
+    @liveness /= num_audiofeatures
+    @tempo /= num_audiofeatures
+
+    # Display the features for user
+    respond_to do |format|
+      format.js{}
+    end
   end
 end

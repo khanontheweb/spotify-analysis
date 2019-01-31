@@ -1,6 +1,12 @@
-<img src="<%= @profile_pic%>" alt="" id="user-profile">
+<img src="<%= @profile_pic if !@profile_pic.nil?%>" alt="" id="user-profile">
 <p><%= @display_name %></p>
 <ul id="user-playlists">
-<%= @names[0]%>
+<%=render partial: 'playlist', collection: @names, as: :name%>
 </ul>
+<p id="stats"></p>
+
+<%= form_tag(root_path, :method=>"get") do %>
+  Search user <%= text_field_tag :user %>
+  <%= submit_tag 'Search' %>
+<% end %>
 <svg id="plot"></svg>
